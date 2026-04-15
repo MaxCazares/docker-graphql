@@ -23,9 +23,16 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_HUB_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
       run: |
-        echo "Iniciando Login"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "Finalizando Login"
+    
+    - name: Build docker image
+      run: |
+        docker build -t m4xo/docker-graphql:0.0.1 .
+    
+    - name: Push docker image
+      run: |
+        docker push m4xo/docker-graphql:0.0.1 .
+    
       
       
     # - name: Build the Docker image
